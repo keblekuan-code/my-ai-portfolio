@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的 AI 作品宇宙 | Personal Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #5067dc;
+      --blue-dark: #4358c9;
+      --dark: #12236f;
+      --dark-2: #101a52;
+      --dark-3: #101b69;
+      --pink: #f8afd2;
+      --pink-dark: #e9a1c8;
+      --pink-shadow: #efa6ce;
+      --paper: #eef1ff;
+      --paper-light: #f6f7ff;
+      --ink: #12162e;
+      --ink-muted: #293a99;
+      --line: rgba(23, 49, 143, 0.18);
+      --shadow: 8px 9px rgba(41, 58, 153, 0.25);
+      --shadow-hover: 8px 12px #efa6ce;
+      --title: 'ZCOOL XiaoWei', 'xiaowei', 'Songti SC', serif;
+      --body: 'Noto Serif SC', 'Huiwen-mincho', 'Songti SC', serif;
+      --pixel: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: #9eacf0;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--body);
+      background: linear-gradient(180deg, #aab6f2 0%, #d8defc 42%, #f2f3ff 100%);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Floating stars */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--paper-light);
+      border: 2px solid var(--dark);
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: float 8s ease-in-out infinite;
+    }
+    .star:nth-child(1) { top: 12%; left: 8%; animation-delay: 0s; }
+    .star:nth-child(2) { top: 22%; right: 12%; animation-delay: 1.5s; width: 10px; height: 10px; }
+    .star:nth-child(3) { top: 55%; left: 5%; animation-delay: 3s; }
+    .star:nth-child(4) { top: 70%; right: 8%; animation-delay: 2s; width: 8px; height: 8px; }
+    .star:nth-child(5) { top: 38%; left: 92%; animation-delay: 4s; }
+    .star:nth-child(6) { top: 85%; left: 18%; animation-delay: 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-18px) rotate(12deg); }
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 1;
+      padding: 84px 0 120px;
+    }
+
+    .container {
+      width: min(1260px, 92vw);
+      margin: 0 auto;
+    }
+
+    /* Top nav */
+    .top-nav {
+      position: fixed;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(244, 246, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      box-shadow: 0 12px 36px rgba(27, 39, 103, 0.15);
+      backdrop-filter: blur(10px);
+      font-family: var(--pixel);
+      font-size: 12px;
+    }
+    .top-nav a {
+      color: var(--dark);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .top-nav a:hover {
+      background: var(--pink);
+      color: var(--dark-2);
+      transform: translateY(-2px);
+    }
+    .nav-pill {
+      background: var(--dark);
+      color: #fff !important;
+    }
+    .nav-pill:hover {
+      background: var(--blue-dark) !important;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 70px 0 60px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: var(--pixel);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark);
+      background: var(--paper);
+      border: 2px solid var(--dark);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 22px;
+      box-shadow: 4px 4px rgba(41, 58, 153, 0.2);
+    }
+    .hero h1 {
+      font-family: var(--title);
+      font-size: clamp(56px, 10vw, 112px);
+      line-height: 1.05;
+      margin: 0 0 16px;
+      color: var(--dark-2);
+      text-shadow: 4px 4px 0 var(--pink-shadow);
+    }
+    .hero h1 span {
+      display: block;
+      font-size: 0.42em;
+      color: var(--blue-dark);
+      text-shadow: none;
+      margin-top: 8px;
+    }
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto 34px;
+      font-size: 18px;
+      color: var(--ink-muted);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--pixel);
+      font-size: 13px;
+      padding: 12px 24px;
+      border: 3px solid var(--dark);
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    .btn-secondary {
+      background: var(--paper);
+      color: var(--dark);
+    }
+    .btn-secondary:hover {
+      background: var(--pink);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Stats */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin: 30px 0 70px;
+    }
+    .stat-card {
+      background: linear-gradient(180deg, #bbc6fb, #ecedff);
+      border: 3px solid var(--dark);
+      border-radius: 18px;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+    .stat-number {
+      font-family: var(--title);
+      font-size: 44px;
+      line-height: 1;
+      color: var(--dark-2);
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: var(--pixel);
+      font-size: 12px;
+      color: var(--ink-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Section heading */
+    .section-heading {
+      display: grid;
+      grid-template-columns: 68px minmax(0, 1fr) minmax(260px, 420px);
+      align-items: end;
+      gap: 18px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 36px;
+    }
+    .section-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--dark);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      box-shadow: 4px 4px rgba(41, 58, 153, 0.22);
+    }
+    .section-title {
+      font-family: var(--title);
+      font-size: 38px;
+      margin: 0;
+      color: var(--dark-2);
+      line-height: 1.1;
+    }
+    .section-title small {
+      display: block;
+      font-family: var(--pixel);
+      font-size: 12px;
+      color: var(--ink-muted);
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--ink-muted);
+      margin: 0;
+      text-align: right;
+    }
+
+    /* Caseboard */
+    .caseboard {
+      background: linear-gradient(180deg, #a8b5f4, #eef1ff);
+      border-top: 3px solid var(--dark);
+      border-bottom: 3px solid var(--dark);
+      padding: 70px clamp(24px, 5vw, 90px) 90px;
+      margin: 60px 0;
+    }
+
+    /* Category blocks */
+    .category {
+      margin-bottom: 56px;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .category-tag {
+      font-family: var(--pixel);
+      font-size: 11px;
+      background: var(--dark);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+    .category-name {
+      font-family: var(--title);
+      font-size: 24px;
+      margin: 0;
+      color: var(--dark-2);
+    }
+    .category-count {
+      margin-left: auto;
+      font-family: var(--pixel);
+      font-size: 11px;
+      color: var(--ink-muted);
+      background: rgba(255,255,255,0.5);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+    }
+
+    /* Grid */
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px 20px;
+    }
+    .case-card {
+      background: linear-gradient(180deg, #bbc6fb, #ecedff);
+      border: 3px solid #17318f;
+      border-radius: 16px;
+      padding: 16px 16px 20px;
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .case-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--dark);
+    }
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card-title {
+      font-family: var(--title);
+      font-size: 20px;
+      margin: 0;
+      color: var(--dark-2);
+      line-height: 1.2;
+    }
+    .card-badges {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .badge {
+      font-family: var(--pixel);
+      font-size: 9px;
+      padding: 3px 7px;
+      border-radius: 4px;
+      border: 1.5px solid var(--dark);
+      white-space: nowrap;
+    }
+    .badge-user { background: var(--pink); color: var(--dark-2); }
+    .badge-curated { background: var(--paper); color: var(--dark); }
+    .badge-trigger { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--ink-muted);
+      margin: 0;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .card-meta {
+      font-family: var(--pixel);
+      font-size: 10px;
+      color: var(--blue-dark);
+      margin-top: 4px;
+      word-break: break-all;
+    }
+
+    /* Agents */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .agent-card {
+      background: linear-gradient(135deg, #f8afd2, #e9a1c8);
+      border: 3px solid var(--dark);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+    }
+    .agent-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 8px 12px rgba(41, 58, 153, 0.3);
+    }
+    .agent-card h3 {
+      font-family: var(--title);
+      font-size: 26px;
+      margin: 0 0 10px;
+      color: var(--dark-2);
+    }
+    .agent-card p {
+      margin: 0;
+      color: var(--dark-3);
+      font-size: 14px;
+    }
+
+    /* Plugins */
+    .plugin-card {
+      background: linear-gradient(180deg, #d8defc, #f6f7ff);
+      border: 3px solid var(--dark);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .plugin-card h3 {
+      font-family: var(--title);
+      font-size: 26px;
+      margin: 0 0 10px;
+    }
+
+    /* Projects */
+    .projects-constellation {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .project-orbit {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      background: rgba(255,255,255,0.45);
+      border: 2px solid var(--dark);
+      border-radius: 14px;
+      padding: 14px 18px;
+      transition: all 0.2s ease;
+    }
+    .project-orbit:hover {
+      background: rgba(255,255,255,0.75);
+      transform: translateX(6px);
+    }
+    .project-date {
+      font-family: var(--pixel);
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+    .project-name {
+      font-family: var(--title);
+      font-size: 18px;
+      margin: 0;
+      color: var(--dark-2);
+    }
+    .project-sessions {
+      font-family: var(--pixel);
+      font-size: 11px;
+      background: var(--dark);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 60px 0 40px;
+      color: var(--ink-muted);
+      font-family: var(--pixel);
+      font-size: 12px;
+    }
+    .footer-divider {
+      width: 120px;
+      height: 3px;
+      background: repeating-linear-gradient(90deg, var(--dark) 0, var(--dark) 6px, transparent 6px, transparent 12px);
+      margin: 0 auto 24px;
+      border-radius: 2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .section-heading { grid-template-columns: 52px 1fr; }
+      .section-desc { display: none; }
+      .section-icon { width: 44px; height: 44px; font-size: 18px; }
+      .section-title { font-size: 28px; }
+      .agent-grid { grid-template-columns: 1fr; }
+      .project-orbit { grid-template-columns: 1fr; gap: 6px; }
+    }
+    @media (max-width: 560px) {
+      .top-nav { display: none; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true">
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+  </div>
+
+  <nav class="top-nav">
+    <a href="#skills" class="nav-pill">Skills</a>
+    <a href="#agents">Agents</a>
+    <a href="#plugins">Plugins</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <main class="site-shell">
+    <section class="hero container">
+      <div class="hero-eyebrow">My AI Portfolio</div>
+      <h1>我的 AI 作品宇宙 <span>PROJECT · SKILL · AGENT</span></h1>
+      <p>这里记录我在 Qoder / QoderWork 环境里长出来的作品：99 个技能、2 位专家 Agent、6 套插件与 244 个项目快照，覆盖营销创意、产品设计、数据洞察、前端工程与钉钉生态。</p>
+      <div class="hero-actions">
+        <a href="#skills" class="btn btn-primary">浏览技能星系 →</a>
+        <a href="#projects" class="btn btn-secondary">查看项目轨迹</a>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-number">99</div>
+          <div class="stat-label">SKILLS INSTALLED</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2</div>
+          <div class="stat-label">EXPERT AGENTS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">6</div>
+          <div class="stat-label">PLUGIN VARIANTS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">244</div>
+          <div class="stat-label">PROJECT SNAPSHOTS</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="caseboard">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-icon">🛠</div>
+          <h2 class="section-title">技能星系 <small>SKILL CONSTELLATION</small></h2>
+          <p class="section-desc">按能力领域分组，收录 ~/.qoder/skills/ 与 ~/.agents/skills/ 中所有本地技能，区分原创与精选。</p>
+        </div>
+
+        <!-- Marketing & Campaign -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">MARKETING</span>
+            <h3 class="category-name">营销创意流水线</h3>
+            <span class="category-count">17 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">campaign</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/campaign</span></div>
+              </div>
+              <p class="card-desc">营销创意工作流唯一入口，5 分钟完成 campaign 立项标准化。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">proposal</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/proposal</span></div>
+              </div>
+              <p class="card-desc">创意提案 skill，支持发散 / 单稿 / 迭代三种模式。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">copy</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/copy</span></div>
+              </div>
+              <p class="card-desc">传播文案包装，产出 slogan + 站内/站外多端文案。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">media-plan</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/media</span></div>
+              </div>
+              <p class="card-desc">媒介策略与预算分配，覆盖站内 + 站外 + 线下。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">insight</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/insight</span></div>
+              </div>
+              <p class="card-desc">从 brief 提炼真洞察，标注洞察家族与创意方向数。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">visual-concept</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/visual</span></div>
+              </div>
+              <p class="card-desc">KV 主视觉概念 + 艺术方向 + moodboard 关键词。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">storyboard</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/storyboard</span></div>
+              </div>
+              <p class="card-desc">TVC 拍摄大纲、分镜表、旁白与视听语言。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">pitch-deck</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/pitch</span></div>
+              </div>
+              <p class="card-desc">洞察引领的汇报结构，自动生成 HTML 汇报页。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">scan</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/scan</span></div>
+              </div>
+              <p class="card-desc">竞品/友商 campaign 扫描与撞车风险预警。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">search</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/search</span></div>
+              </div>
+              <p class="card-desc">案例库智能检索，按洞察家族分组。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">recap</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/recap</span></div>
+              </div>
+              <p class="card-desc">Campaign 复盘 case study，沉淀回素材库。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">daily-cases</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/daily-cases</span></div>
+              </div>
+              <p class="card-desc">每日扫描中文营销创意案例并产出结构化日报。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">interaction-design</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/interaction</span></div>
+              </div>
+              <p class="card-desc">用户旅程地图、游戏化机制与情感触点设计。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">taobao-marketing-expert</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">淘宝市场部营销专家 agent 角色定义与工作流总纲。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">copywriting</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">营销文案撰写、重写与优化。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">qingbaoju-ai-sale-info</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">竞对大促情报及行业趋势分析。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">marketing-planner</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">营销策划与活动启动器。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Content & Social -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">CONTENT</span>
+            <h3 class="category-name">内容与社媒运营</h3>
+            <span class="category-count">10 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">xiaohongshu</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">小红书内容工具：搜索、帖子详情、用户主页、评论。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">xiaohongshu-heatmap</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">统计小红书笔记热度，生成排名表格与可视化图表。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">redbook-analyze</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">小红书行业情报监测助手，输出 Excel 情报报告。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">baoyu-xhs-images</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">小红书信息图系列生成，10 种视觉风格 × 8 种布局。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">weibo-hot</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">微博热搜 Top 50 获取与钉钉文档持久化。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">event-monitoring-briefing</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">品牌事件社媒舆情简报，跨平台信源校验与原声摘录。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">human-core</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">去 AI 味道增强版，把文本改成人写的自然语气。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">guodan-lyrics</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">国蛋 GorDoN 说唱歌词参考库，用于押韵与 flow 分析。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">notion-infographic</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">从参考文档批量生成 Notion 风格手绘信息图。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">baoyu-article-illustrator</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">文章配图分析，Type × Style 二维生成插图。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Productivity & Documents -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">DOCS</span>
+            <h3 class="category-name">文档与效率工具</h3>
+            <span class="category-count">10 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">docx</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">端到端 Word 文档创建、读取、编辑与模板填充。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">pdf</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">PDF 读取、合并、拆分、旋转、水印与创建。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">pptx</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">演示文稿创建、读取、编辑与内容提取。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">xlsx</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">电子表格读取、编辑、公式与图表。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">ale-file-parser</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">PDF/图片/Word/PPT/Excel/邮件解析为 Markdown。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">dingtalk-doc-rw</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">钉钉在线文档读写、块操作、导入导出与权限。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">ei-internal-doc-writer</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">智能内部文档写作助手，结合 OKR/邮件/群聊上下文。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">internal-comms</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">内部沟通写作资源，适配公司格式。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">memory</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">跨平台持久个人记忆，保存偏好与上下文。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">ljg-plain</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/plain</span></div>
+              </div>
+              <p class="card-desc">认知原子：白。把任何内容改写成 12 岁孩子能懂的语言。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- AI/Agent Infrastructure -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">INFRA</span>
+            <h3 class="category-name">AI / Agent 基础设施</h3>
+            <span class="category-count">12 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">create-skill</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">引导创建有效的 Agent Skills 与 SKILL.md。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">plugin-creator</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">创建、定制或修改 QoderWork 专家插件。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">find-skills</h4>
+              <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">任务前第一步，发现最合适的专用 skill。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">ljg-skill-map</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">扫描已安装技能，生成可视化总览。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">agent-browser</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">AI agent 浏览器自动化：打开、填写、点击、截图、抓取。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">tinyfish-web-automation</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">通过 TinyFish MCP 运行交互式网页任务。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">self-improving-agent-skill</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">基于经验持续学习，优化 Agent 能力。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">install-skill-dependency</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">诊断并修复 skill 缺失的依赖与二进制。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">claude-code-model-switch</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">Claude Code CLI 模型切换标准流程。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">qoderwork-guidance</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">通过 Connector 管理 QoderWork 应用能力。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">extract-page-style</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">网站设计风格抓取-沉淀-复用工具集。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">brainstorming-v2</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">专业头脑风暴流程，探明意图与需求。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Data & Analytics -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">DATA</span>
+            <h3 class="category-name">数据与分析</h3>
+            <span class="category-count">6 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">fbi-skill</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">FBI DataMate 智能对话：指标查询、异动归因、趋势分析。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">odps-skill</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">MaxCompute/ODPS 项目、表、分区、查询与权限。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">quickbi-smartq-chat</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">自然语言问数，智能匹配 Quick BI / Excel 数据集。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">market-research-reports</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">生成 50+ 页顶级咨询公司风格市场研究报告。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">deep-research</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">多源综合研究助手，带引用。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">dagong-tujian</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">AI 使用数据生成老板人格 + 打工喵人格卡片。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Internal / Enterprise -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">ENTERPRISE</span>
+            <h3 class="category-name">企业内网与钉钉生态</h3>
+            <span class="category-count">14 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">dws</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">钉钉产品能力统一管理：AI 表格、日历、通讯录、群聊、审批等。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">aliren</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">阿里人生 CLI，处理会议室、Aliway、BPMS、ACL、ATA 等。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">ata-all</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">ATA 内部技术社区官方接口：文章、草稿、评论、任务。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">guard-apply</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">安全卫士权限申请与审批流查询。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">free-room-radar</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">空闲会议室雷达，锁定本大楼就近推荐。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">invoke-nwxm</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">内外小蜜，职场内部事务与 IT 故障排查。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">ei-internal-search</h4>
+              <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">企业内网综合检索：应用、知识、人员。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">query-okr</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">按花名/姓名/工号查询 OKR。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">dingtalk-chat-summary</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">通用钉钉聊天记录提炼，自定义分类体系。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">moses-news-subscription-push</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">多平台热点资讯订阅与钉钉机器人推送。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">kunyi-skill</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">业务风控服务：内容安全、主播准入、大促拦截查询。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">vm-error-recovery</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">安全 workspace 启动错误诊断与恢复。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">qoderwork-ppt</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">QoderWork 风格演示文稿，14 套模板匹配。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">qoderwork-taoxiaobao-skin</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">淘小宝 × 娃三岁联名玩偶主题皮肤，零侵入 CDP 注入。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Design & Frontend -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">DESIGN</span>
+            <h3 class="category-name">设计与前端工程</h3>
+            <span class="category-count">15 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">frontend-design</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">高设计感前端界面生成，拒绝模板脸。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">design-taste-frontend</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">反 slop 前端 skill，审计优先、真实设计系统。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">responsive-design</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">容器查询、流体排版、CSS Grid 移动端优先。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">theme-factory</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">10 套预设主题，应用于幻灯片、文档、落地页。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">photo-abstract-editorial</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">照片转抽象记忆画板 + 诗意英文标题的竖版编辑艺术。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">generate-image</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">GPT Image 模型生成图片并保存本地。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">image-bg-remove</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">本地图片抠图去背景，输出真透明 PNG。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">image-enhancer</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">提升截图分辨率、清晰度与锐利度。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">doneai</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">互联网办公场景一站式海报/信息图生成器。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">baoyu-slide-deck</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">从内容生成专业幻灯片图片。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">taobao-brand-guidelines</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">2025 淘宝品牌视觉规范应用：Logo、色彩、字体、IP。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">taoxiaobao-character-guidelines</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">淘小宝 IP 形象合规审核。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">prd-to-prototype</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">PRD 转高保真交互原型图，多屏 + 箭头 + 分支。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">manim-composer</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">教育/解释视频与 3Blue1Brown 风格动画规划。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">essence-avatar</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">公众人物/方法论/书籍蒸馏与对话工具。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Compliance & Review -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">COMPLIANCE</span>
+            <h3 class="category-name">合规与质量审查</h3>
+            <span class="category-count">6 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">ad-review</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">广告内容与营销素材合规审核。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">redline</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/redline</span></div>
+              </div>
+              <p class="card-desc">法务红线快查，7 条 checklist pass/fail。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">prd-reviewer</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span></div>
+              </div>
+              <p class="card-desc">PRD 六维毒舌锐评 + 小红书风格封面图。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">prd-review-suck</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">PRD 质量锐评与可视化打分。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">prd-to-rules</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/rules</span></div>
+              </div>
+              <p class="card-desc">从 PRD 自动生成面向用户的活动规则文档。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">kunyi-skill</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">业务风控：内容安全、主播准入、大促报名拦截。</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- PRD & Workflow -->
+        <div class="category">
+          <div class="category-header">
+            <span class="category-tag">WORKFLOW</span>
+            <h3 class="category-name">PRD 与产品工作流</h3>
+            <span class="category-count">5 skills</span>
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">prd</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/prd</span></div>
+              </div>
+              <p class="card-desc">互动玩法 PRD skill，对接产品/技术。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">prd-to-prototype</h4>
+                <div class="card-badges"><span class="badge badge-curated">精选</span></div>
+              </div>
+              <p class="card-desc">PRD 转高保真交互原型图。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">interaction-design</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/interaction</span></div>
+              </div>
+              <p class="card-desc">补齐创意方向的体验感层。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">recap</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/recap</span></div>
+              </div>
+              <p class="card-desc">Campaign 复盘 case study 与素材库沉淀。</p>
+            </article>
+            <article class="case-card">
+              <div class="card-top">
+                <h4 class="card-title">pitch-deck</h4>
+                <div class="card-badges"><span class="badge badge-user">原创</span><span class="badge badge-trigger">/pitch</span></div>
+              </div>
+              <p class="card-desc">洞察引领的汇报结构与 HTML 汇报页。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="agents" class="container" style="margin-bottom:70px;">
+      <div class="section-heading">
+        <div class="section-icon">🤖</div>
+        <h2 class="section-title">专家 Agent <small>EXPERT AGENTS</small></h2>
+        <p class="section-desc">~/.qoder/agents/ 中定义的领域专家角色，可被任意对话调用。</p>
+      </div>
+      <div class="agent-grid">
+        <article class="agent-card">
+          <h3>marketing-planner</h3>
+          <p>营销策划专家，思维活跃鬼点子多，擅长创意策划、营销方案输出、用户增长策略与内容营销。</p>
+        </article>
+        <article class="agent-card">
+          <h3>prd-writer</h3>
+          <p>产品需求文档写作专家，将模糊需求转化为结构清晰、逻辑严密的 PRD，梳理用户画像与业务流程。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="plugins" class="caseboard" style="background:linear-gradient(180deg,#d8defc,#f6f7ff);">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-icon">🔌</div>
+          <h2 class="section-title">专家插件 <small>EXPERT PLUGINS</small></h2>
+          <p class="section-desc">~/.qoderwork/plugins-custom/ 下的自定义插件变体。</p>
+        </div>
+        <div class="plugin-card">
+          <h3>市场营销 <span style="font-family:var(--pixel);font-size:12px;color:var(--ink-muted);">× 6 variants</span></h3>
+          <p>市场营销全场景工具，覆盖营销文案、广告合规、竞品追踪、活动策划、社媒热点追踪、SEO 优化、营销效果分析与品牌调性审查八大场景。独立可用，连接文档协作/数据表格/竞品情报/设计工具/待办工具 MCP 后能力增强。</p>
+          <p style="margin-top:12px;font-family:var(--pixel);font-size:11px;color:var(--ink-muted);">variants: 市场营销-custom / -custom-2 / -custom-3 / -custom-4 / -custom-5 / -custom-6</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="container" style="margin-bottom:70px;">
+      <div class="section-heading">
+        <div class="section-icon">🌌</div>
+        <h2 class="section-title">项目轨迹 <small>PROJECT SNAPSHOTS</small></h2>
+        <p class="section-desc">~/.qoder/projects/ 中 244 个项目快照，记录每次对话的上下文与产物。</p>
+      </div>
+      <div class="projects-constellation">
+        <article class="project-orbit">
+          <span class="project-date">2026-09-02</span>
+          <h4 class="project-name">82bf9c26 — 我的 AI 作品宇宙作品集</h4>
+          <span class="project-sessions">current</span>
+        </article>
+        <article class="project-orbit">
+          <span class="project-date">2026-09-02</span>
+          <h4 class="project-name">497bcc55, d1c7f7a3, 54fae58c...</h4>
+          <span class="project-sessions">3 sessions</span>
+        </article>
+        <article class="project-orbit">
+          <span class="project-date">2026-09-01</span>
+          <h4 class="project-name">8a500f4f, d6490ab4, 563146fa, ecb88e97</h4>
+          <span class="project-sessions">7 sessions</span>
+        </article>
+        <article class="project-orbit">
+          <span class="project-date">2026-08-27</span>
+          <h4 class="project-name">39e34b42, e421913d</h4>
+          <span class="project-sessions">2 sessions</span>
+        </article>
+        <article class="project-orbit" style="justify-content:center; background:transparent; border-style:dashed;">
+          <p style="margin:0;font-family:var(--pixel);font-size:12px;color:var(--ink-muted);">+ 231 more QoderWork workspace snapshots in ~/.qoder/projects/</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="container">
+      <div class="section-heading">
+        <div class="section-icon">✦</div>
+        <h2 class="section-title">关于我 <small>ABOUT ME</small></h2>
+      </div>
+      <div class="plugin-card" style="max-width:760px;">
+        <p>这是我的个人作品集。它的颜色、字体、硬边阴影与粉色悬停态来自 <a href="https://dongdongzhang1222-coder.github.io/box-universe-team-archive" target="_blank" style="color:var(--dark);text-decoration:underline;">BOX UNIVERSE</a> 的设计系统：站酷小薇标题体、汇文明朝体正文、periwinkle 蓝与 navy 深海蓝、粉色作为唯一的交互强调色。</p>
+        <p>页面内容从我的本地环境自动盘点出来：~/.qoder/skills/、~/.agents/skills/、~/.qoder/agents/、~/.qoderwork/plugins-custom/ 与 ~/.qoder/projects/。这些作品是我与 Qoder、Claude 以及各路 Agent 一起搭建的技能、Agent、插件与项目轨迹。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <p>我的 AI 作品宇宙 · Generated from local Qoder environment · 2026</p>
+  </footer>
+
+  <script>
+    // Smooth reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.case-card, .agent-card, .project-orbit, .stat-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
